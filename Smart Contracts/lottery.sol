@@ -21,4 +21,8 @@ contract Lottery {
         return address(this).balance; // address(this) => gives reference to the current contract address
     }
 
+    function getRandomParticipants() public view returns(uint) {
+        return uint(keccak256(abi.encodePacked(block.difficulty, block.timestamp, participants.length)));
+    }
+
 }
