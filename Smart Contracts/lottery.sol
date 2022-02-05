@@ -25,4 +25,21 @@ contract Lottery {
         return uint(keccak256(abi.encodePacked(block.difficulty, block.timestamp, participants.length)));
     }
 
+    function selectWinner() public returns(address) {
+        require(msg.sender == manager);
+        require(participants.length >= 3);
+
+        uint random = getRandomParticipants();
+        address payable winner;
+        uint index = random % participants.length;
+
+        winner = participants[index];
+        winner.transfer(getBalance());
+
+        // Resetting the dynamic array again to zero
+        participants = new address payable[](0);
+
+        return winner;
+    }
+
 }
