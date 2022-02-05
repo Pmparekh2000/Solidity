@@ -6,7 +6,7 @@ contract demo {
     uint number;
 
     function setter(uint _number) public {
-        number = _number;
+        number = _number + 1;
     }
 
     function getter() public view returns(uint) {
